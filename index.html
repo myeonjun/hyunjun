@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #4b0082; /* 초기 배경색 */
+            font-family: Arial, sans-serif;
+            overflow-x: hidden; /* Hide the horizontal scrollbar */
+            transition: background-color 0.5s ease-out;
+        }
+
+        header {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: rgba(34, 34, 34, 0.8);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: background-color 0.5s ease-out;
+            border-radius: 10px 0 0 10px;
+        }
+
+        header nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        header a:hover {
+            background-color: #555;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        header a.active {
+            background-color: #4b0082;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #ddd;
+            font-size: 20px;
+            max-width: 800px;
+        }
+
+        .projects, .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .project, .contact-item {
+            background: #4b0082;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            color: white;
+        }
+
+        /* Added styles for Photoshop icon */
+        #skills .icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #skills img {
+            width: 100px;
+            height: 100px;
+            opacity: 0; /* 아이콘 숨기기 */
+        }
+
+        .project img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 변경 */
+            border-radius: 10px;
+        }
+
+        .project button {
+            background: none;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            color: inherit;
+            transition: color 0.3s ease;
+            width: 100%;
+            height: 100%;
+        }
+
+        .project button div {
+            background-color: #4b0082;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            color: white;
+        }
+
+        .project button:hover div {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#skills">Skills</a>
+            <a href="#works">Works</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="section show" id="home">
+        <h1>Hi</h1>
+        <p>Welcome to Hyunjun's portfolio</p>
+    </div>
+
+    <div class="section" id="skills">
+        <h1>Skills</h1>
+        <p>Skills section content</p>
+        <div class="icons">
+            <img src="Adobe_Photoshop_CC_icon.svg.png" alt="">
+            <img src="5968472.png" alt="">
+            <img src="5968482.png" alt="">
+            <img src="906324.png" alt="">
+        </div>
+    </div>
+
+    <div class="section" id="works">
+        <h1>Works</h1>
+        <p>Works section content</p>
+        <div class="projects">
+            <div class="project"><img src="캡처.PNG" alt=""></div>
+            <div class="project"><img src="4.PNG" alt=""></div>
+        </div>
+    </div>
+
+    <div class="section" id="contact">
+        <h1>Contact</h1>
+        <p>Contact section content</p>
+        <div class="contact-info">
+            <div class="contact-item">Email: abcd123@example.com</div>
+            <div class="contact-item">Phone: 010-5339-6944</div>
+        </div>
+    </div>
+
+    <!-- ScrollMagic 및 GSAP 라이브러리 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('header a');
+        const colors = [
+            '#4b0082', // Home
+            '#301934', // About
+            '#200f24', // Skills
+            '#120713', // Works
+            '#000000'  // Contact
+        ];
+
+        function checkScroll() {
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.body.style.backgroundColor = colors[index];
+                    section.classList.add('show');
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index].classList.add('active');
+                } else {
+                    section.classList.remove('show');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', () => {
+            checkScroll();
+        });
+
+        // ScrollMagic 애니메이션 추가
+        const controller = new ScrollMagic.Controller();
+
+        sections.forEach((section) => {
+            // Create a GSAP timeline for each section
+            const tl = gsap.timeline();
+            tl.from(section.querySelector('h1'), { opacity: 0, y: 30, duration: 0.4, ease: 'power2.out' });
+            tl.from(section.querySelector('p'), { opacity: 0, y: 30, duration: 0.4, ease: 'power2.out' }, '-=0.3');
+
+            const scene = new ScrollMagic.Scene({
+                triggerElement: section,
+                triggerHook: 0.75, // 섹션이 화면의 75%에 도달하면 애니메이션 시작
+                reverse: true // 스크롤 역방향으로 되돌아갈 때 애니메이션 되풀이
+            })
+            .setTween(tl)
+            .addTo(controller);
+        });
+
+        // Skills 섹션 아이콘 애니메이션 추가
+        const icons = document.querySelectorAll('#skills .icons img');
+        icons.forEach((icon, index) => {
+            const iconTl = gsap.timeline();
+            iconTl.to(icon, { opacity: 1, duration: 0.5, ease: 'power2.out', delay: index * 0.3 });
+
+            new ScrollMagic.Scene({
+                triggerElement: icon,
+                triggerHook: 0.75,
+                reverse: true
+            })
+            .setTween(iconTl)
+            .addTo(controller);
+        });
+    </script>
+</body>
+</html>
